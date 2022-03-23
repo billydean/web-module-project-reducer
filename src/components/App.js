@@ -3,12 +3,18 @@ import './App.css';
 import reducer, { initialState } from '../reducers/index';
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
-import { addOne } from '../actions/index';
+import { addOne, clearDisplay, memoryReset } from '../actions/index';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const oneHandler = () => {
     dispatch(addOne());
+  }
+  const clearHandler = () => {
+    dispatch(clearDisplay());
+  }
+  const memoryResetHandler = () => {
+    dispatch(memoryReset());
   }
   return (
     <div className="App">
@@ -27,7 +33,7 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
+              <CalcButton value={"M+"} onClick={memoryResetHandler}/>
               <CalcButton value={"MR"}/>
               <CalcButton value={"MC"}/>
             </div>
@@ -57,7 +63,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={clearHandler}/>
             </div>
 
           </form>
